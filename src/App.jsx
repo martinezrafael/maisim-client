@@ -8,7 +8,6 @@ import CalcMetragem from './components/Comparativo1/CalcMetragem';
 const App = () => {
   return (
     <>
-      <Header />
       <CalcMetragem />
       <Top10List />
     </>
