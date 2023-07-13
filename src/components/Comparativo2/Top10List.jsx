@@ -15,8 +15,8 @@ const Top10List = () => {
           <th>Share %</th>
         </thead>
         <tbody>
-          {dataGenerico.map((item) => (
-            <tr>
+          {dataGenerico.map((item, index) => (
+            <tr key={index}>
               <td>{item.PRODUTO}</td>
               <td>{item.LABORATORIO}</td>
               <td>{item.FCC}</td>

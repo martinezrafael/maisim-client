@@ -1,32 +1,53 @@
 import React, { useState, useEffect } from "react";
 
 const FormCalcMetragem = () => {
-  const [meters, setMeters] = useState(0);
-  const [invoicing, setInvoicing] = useState(0);
+  const [metragem, setMetragem] = useState(" ");
+  const [faturamento, setFaturamento] = useState(" ");
+  const [valorMedio, setValorMedio] = useState(0);
+  const [potencial, setPotencial] = useState("");
+  const [minimo, setMinimo] = useState(null);
+  const [maximo, setMaximo] = useState(null);
+  const [categoria, setCategoria] = useState(null);
 
-  const setMetersLocalStorage = (event) => {
+  const [totalFaturamento, setTotalFaturamento] = useState(0);
+  const [minimoFaturamento, setMinimoFaturamento] = useState(0);
+  const [maximoFaturamento, setMaximoFaturamento] = useState(0);
+
+  const setDataLocalStorage = (event) => {
+    0;
     event.preventDefault();
-    localStorage.setItem("metragem", meters.toString());
-    localStorage.setItem("faturamento", invoicing.toString());
+    localStorage.setItem("metragem", metragem.toString());
+    localStorage.setItem("faturamento", faturamento.toString());
+    calcFaturamento();
   };
 
-  useEffect(() => {
-    const calcFaturamento = () => {
-      const metragem = localStorage.getItem("metragem");
-      const faturamento = localStorage.getItem("faturamento");
-    };
-  }, []);
+  const calcFaturamento = () => {
+    const metragem = localStorage.getItem("metragem");
+    const faturamento = localStorage.getItem("faturamento");
+
+    if (metragem >= 50 || metragem <= 50 + 10 - 0.1) {
+      setPotencial("c");
+      localStorage.setItem("potencial", potencial);
+      setCategoria(1);
+      localStorage.setItem("categoria", categoria.toString());
+    }
+
+    if (metragem >= 50 || metragem <= 90 + 10 - 0.1) {
+      setValorMedio(2000);
+      localStorage.setItem("valor_medio", valorMedio.toString());
+    }
+  };
 
   return (
     <div className="dark:text-white">
-      <form onSubmit={setMetersLocalStorage}>
+      <form onSubmit={setDataLocalStorage}>
         <div>
           <label htmlFor="meters">Metragem (em m2)</label>
           <input
             type="text"
             id="meters"
-            value={meters}
-            onChange={(event) => setMeters(event.target.value)}
+            value={metragem}
+            onChange={(event) => setMetragem(event.target.value)}
           />
         </div>
         <div>
@@ -34,8 +55,8 @@ const FormCalcMetragem = () => {
           <input
             type="text"
             id="invoicing"
-            value={invoicing}
-            onChange={(event) => setInvoicing(event.target.value)}
+            value={faturamento}
+            onChange={(event) => setFaturamento(event.target.value)}
           />
         </div>
         <button>Calcular</button>
@@ -45,11 +66,11 @@ const FormCalcMetragem = () => {
       <div>
         <div>
           <p>Metragem média</p>
-          <span>{localStorage.getItem("metragem")}</span>
+          <span>{metragem}</span>
         </div>
         <div>
           <p>Faturamento médio (aprox)</p>
-          <span>{localStorage.getItem("faturamento")}</span>
+          <span>{metragem * faturamento}</span>
         </div>
       </div>
     </div>
