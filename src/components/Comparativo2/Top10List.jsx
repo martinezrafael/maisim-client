@@ -1,29 +1,27 @@
-import React from "react";
-import dataGenerico from "../../../genericos.json";
+import React, { useState,useEffect } from "react";
+import axios from 'axios';
+
 
 const Top10List = () => {
+  const [brickList, setBrickList] = useState([]);
+
+  useEffect(() => {
+    async function getBrick() {
+      try {
+        const response = await axios.get('https://apiudf.azurewebsites.net/top/100/GENERICO');
+        setBrickList(response);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getBrick();
+  },[])
+
   return (
     <div className="bg-purple-300 dark:bg-purple-400 dark:text-white">
-      <div></div>
-      <header>
-        <h3>Genérico</h3>
-      </header>
-      <table>
-        <thead>
-          <th>Nome</th>
-          <th>Laboratório</th>
-          <th>Share %</th>
-        </thead>
-        <tbody>
-          {dataGenerico.map((item, index) => (
-            <tr key={index}>
-              <td>{item.PRODUTO}</td>
-              <td>{item.LABORATORIO}</td>
-              <td>{item.FCC}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {brickList.map((props) => {
+        <span>{props.EAN}</span>
+      })}
     </div>
   );
 };
