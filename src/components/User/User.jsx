@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import userData from "../../../user.json";
 
 const User = (props) => {
   const [userName, setUserName] = useState("");
@@ -6,7 +7,7 @@ const User = (props) => {
 
   return (
     <div>
-      <h1 className="font-poppins dark:text-white">José</h1>
+      <h1 className="font-poppins dark:text-white">{userData.username}</h1>
       <span className="font-poppins dark:text-white">12.123.1234/001-12</span>
     </div>
   );
