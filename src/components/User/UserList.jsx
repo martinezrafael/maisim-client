@@ -39,7 +39,7 @@ const UserList = () => {
     async function fetchData() {
       try {
         const accessToken = await getAccessToken();
-        const apiEndpoint = "https://universidadedafarmacia.com.br/v2/users";
+        const apiEndpoint = `${baseUrl}/v2/users`;
 
         const response = await axios.get(apiEndpoint, {
           headers: {
