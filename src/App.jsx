@@ -1,13 +1,12 @@
 import React from 'react';
 import '../src/index.css';
-import Header from '../src/components/Global/Header';
-import UserList from './components/User/UserList';
+import Top10List from './components/Comparativo2/Top10List';
+
 
 const App = () => {
   return (
     <>
-      <Header />
-      <UserList />
+      <Top10List />
     </>
   )
 }
