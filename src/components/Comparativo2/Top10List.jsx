@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import axios from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 
 
 
@@ -8,8 +8,11 @@ const Top10List = () => {
 
   useEffect(() => {
     async function getBrick() {
+      const rq = AxiosHeaders;
+
       try {
-        const response = await axios.get('https://apiudf.azurewebsites.net/top/4');
+        const response = await axios.get('https://apiudf.azurewebsites.net/top/100');
+        console.log(rq);
         setBrickList(response.data);
       } catch (error) {
         console.error(error);

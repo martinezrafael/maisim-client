@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import FormCalcMetragem from "./FormCalcMetragem";
 
 const CalcMetragem = () => {
-  const [meters, setMeters] = useState("");
-  const [invoicing, setInvoicing] = useState("");
-
   return (
     <div>
       <header>

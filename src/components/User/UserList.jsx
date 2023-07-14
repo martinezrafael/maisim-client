@@ -28,6 +28,7 @@ const UserList = () => {
             "Lw-Client": clientId,
           },
         });
+        console.log(response.data.tokenData.access_token)
         return response.data.tokenData.access_token;
       } catch (error) {
         console.error("Erro ao obter o token de acesso:", error);
