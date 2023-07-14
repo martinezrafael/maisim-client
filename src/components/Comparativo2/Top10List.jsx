@@ -8,11 +8,9 @@ const Top10List = () => {
 
   useEffect(() => {
     async function getBrick() {
-      const rq = AxiosHeaders;
-
+  
       try {
         const response = await axios.get('https://apiudf.azurewebsites.net/top/100');
-        console.log(rq);
         setBrickList(response.data);
       } catch (error) {
         console.error(error);
