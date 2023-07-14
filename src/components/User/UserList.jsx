@@ -6,9 +6,9 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const baseUrl = import.meta.env.VITE_API_URL;
-    const id = import.meta.env.VITE_CLIENT_ID;
-    const secret = import.meta.env.VITE_CLIENT_SECRET;
+    const baseUrl = "https://universidadedafarmacia.com.br";
+    const id = "63cfd92085cf5d2cb507c4b2";
+    const secret = "CCB9lhbsnpQ5W9aOOKNf4l6N5J4LaNG6O8cfq8E8Om6FQA1VaU";
 
     async function getAccessToken() {
       const url = `${baseUrl}/admin/api/oauth2/access_token`;
