@@ -9,9 +9,7 @@ const UserList = () => {
     const baseUrl = import.meta.env.VITE_API_URL;
     const id = import.meta.env.VITE_CLIENT_ID;
     const secret = import.meta.env.VITE_CLIENT_SECRET;
-    console.log(baseUrl);
   
-
     async function getAccessToken() {
       const url = `${baseUrl}/admin/api/oauth2/access_token`;
       const clientId = id;
@@ -30,6 +28,7 @@ const UserList = () => {
             "Lw-Client": clientId,
           },
         });
+        console.log(response.data.tokenData.access_token)
         return response.data.tokenData.access_token;
       } catch (error) {
         console.error("Erro ao obter o token de acesso:", error);
@@ -40,12 +39,12 @@ const UserList = () => {
     async function fetchData() {
       try {
         const accessToken = await getAccessToken();
-        const apiEndpoint = `${baseUrl}/v2/users`;
+        const apiEndpoint = "https://universidadedafarmacia.com.br/v2/users";
 
         const response = await axios.get(apiEndpoint, {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
-            // "Lw-Client": "your_client_id",
+            "Authorization": `Bearer ${accessToken}`,
+            "Lw-Client": import.meta.env.VITE_CLIENT_ID,
           },
         });
         setUsers(response.data)
