@@ -38,7 +38,7 @@ const UserList = () => {
     async function fetchData() {
       try {
         const accessToken = await getAccessToken();
-        const apiEndpoint = `${import.meta.env.VITE_API_URL}/v2/users`;
+        const apiEndpoint = `https://stoplight.io/mocks/learnworlds/api:main/2951998/v2/users`;
 
         const response = await axios.get(apiEndpoint, {
           headers: {
