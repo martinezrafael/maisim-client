@@ -38,7 +38,7 @@ const UserList = () => {
     async function fetchData() {
       try {
         const accessToken = await getAccessToken();
-        const apiEndpoint = `${baseUrl}/v2/users`;
+        const apiEndpoint = `${baseUrl}/v2/courses`;
 
         const response = await axios.get(apiEndpoint, {
           headers: {
