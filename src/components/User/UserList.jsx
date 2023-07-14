@@ -6,14 +6,16 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const baseUrl = "https://universidadedafarmacia.com.br";
-    const id = "63cfd92085cf5d2cb507c4b2";
-    const secret = "CCB9lhbsnpQ5W9aOOKNf4l6N5J4LaNG6O8cfq8E8Om6FQA1VaU";
+    const baseUrl = import.meta.env.VITE_API_URL;
+    const id = import.meta.env.VITE_CLIENT_ID;
+    const secret = import.meta.env.VITE_CLIENT_SECRET;
+  
 
     async function getAccessToken() {
       const url = `${baseUrl}/admin/api/oauth2/access_token`;
       const clientId = id;
       const clientSecret = secret;
+
 
       const requestBody = {
         client_id: clientId,
@@ -27,8 +29,7 @@ const UserList = () => {
             "Lw-Client": clientId,
           },
         });
-        console.log(response.data.access_token);
-        return response.data.access_token;
+        return response.data.tokenData.access_token
       } catch (error) {
         console.error("Erro ao obter o token de acesso:", error);
         throw error;
