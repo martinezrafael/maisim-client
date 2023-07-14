@@ -6,7 +6,7 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const baseUrl = "https://universidadedafarmacia.com.br/admin/api/oauth2/";
+    const baseUrl = "https://universidadedafarmacia.com.br/admin/api/oauth2";
     const id = "63cfd92085cf5d2cb507c4b2";
     const secret = "CCB9lhbsnpQ5W9aOOKNf4l6N5J4LaNG6O8cfq8E8Om6FQA1VaU";
 
