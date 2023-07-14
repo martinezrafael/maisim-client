@@ -18,12 +18,13 @@ const Top10List = () => {
     }
     getBrick();
     
-  },[])
+  },[]) 
 
   return (
-    <div>
-      <table >
-        <thead>
+    <div 
+    className="bg-gradient-to-b from-purple-500 to-purple-600 w-full h-full max-w-3xl text-white m-auto">
+      <table>
+        <thead className="font-medium">
           <th>Nome</th>
           <th>Laboratório</th>
           <th>Share</th>
@@ -32,9 +33,9 @@ const Top10List = () => {
           {
             brickList.map((props, index) =>(
               <tr key={index} className={`item-${index+=1}`}>
-                <td>{props.PRODUTO}</td>
-                <td>{props.LABORATORIO}</td>
-                <td>{props.UNIDADES}</td>
+                <td className="p-4 text-center">{props.PRODUTO}</td>
+                <td className="p-4 text-center">{props.LABORATORIO}</td>
+                <td className="p-4 text-center">{props.UNIDADES}</td>
               </tr>
             ))
           }

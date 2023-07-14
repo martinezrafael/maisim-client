@@ -15,7 +15,6 @@ const UserList = () => {
       const clientId = id;
       const clientSecret = secret;
 
-
       const requestBody = {
         client_id: clientId,
         client_secret: clientSecret,
@@ -38,12 +37,11 @@ const UserList = () => {
     async function fetchData() {
       try {
         const accessToken = await getAccessToken();
-        const apiEndpoint = `${baseUrl}/v2/courses`;
+        const apiEndpoint = `${baseUrl}/v2/users`;
 
         const response = await axios.get(apiEndpoint, {
           headers: {
             "Authorization": `Bearer ${accessToken}`,
-            "Lw-Client": import.meta.env.VITE_CLIENT_ID,
           },
         });
         setUsers(response.data)
@@ -61,7 +59,7 @@ const UserList = () => {
       <ul>
         {users.map((user, index) => (
           <li key={index}>
-            <p>id: {user.id}</p>
+            <p>id:{user.id}</p>
           </li>
         ))}
       </ul>
