@@ -53,7 +53,7 @@ const UserList = () => {
     }
 
     fetchData();
-  }, [users]);
+  }, []);
 
   return (
     <div>
