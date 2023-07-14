@@ -9,6 +9,7 @@ const UserList = () => {
     const baseUrl = import.meta.env.VITE_API_URL;
     const id = import.meta.env.VITE_CLIENT_ID;
     const secret = import.meta.env.VITE_CLIENT_SECRET;
+    console.log(baseUrl);
   
 
     async function getAccessToken() {
@@ -29,7 +30,7 @@ const UserList = () => {
             "Lw-Client": clientId,
           },
         });
-        return response.data.tokenData.access_token
+        return response.data.tokenData.access_token;
       } catch (error) {
         console.error("Erro ao obter o token de acesso:", error);
         throw error;
@@ -44,7 +45,7 @@ const UserList = () => {
         const response = await axios.get(apiEndpoint, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "Lw-Client": "your_client_id",
+            // "Lw-Client": "your_client_id",
           },
         });
         setUsers(response.data)
