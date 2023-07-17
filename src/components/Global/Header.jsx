@@ -2,7 +2,6 @@ import React from "react";
 import User from "../User/User";
 import Logo from "./Logo";
 import TogleTheme from "../TogleTheme/TogleTheme";
-import SelectDate from "./SelectDate";
 
 const Header = () => {
   return (
@@ -10,8 +9,6 @@ const Header = () => {
       <div className="flex flex-col items-center">
         <Logo />
         <User />
-        <SelectDate
-         />
       </div>
       <TogleTheme />
     </header>
