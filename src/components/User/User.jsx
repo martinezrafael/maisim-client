@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getAccessToken } from "../../../api/api.lw";
 import { useParams } from "react-router-dom";
+import Top10List from "../Comparativo2/Top10List";
 
 const User = () => {
   const [userName, setUserName] = useState("");
@@ -23,8 +24,9 @@ const User = () => {
           },
         });
         
+        const cepToNumber = Number(response.data.billing_info.bf_postalcode.replace('-', ''));
         setUserName(response.data.username);
-        setCep(response.data.billing_info.bf_postalcode);
+        setCep(cepToNumber);
       } catch (error) {
         console.error("Erro na solicitação para a API externa:", error);
       }
@@ -36,6 +38,7 @@ const User = () => {
     <div className="dark:text-white font-poppins">
       <h3>{userName}</h3>
       <p>{cep}</p>
+      <Top10List />
     </div>
   );
 };

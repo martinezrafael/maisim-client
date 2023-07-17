@@ -11,6 +11,7 @@ const Top10List = () => {
   
       try {
         const response = await axios.get('https://apiudf.azurewebsites.net/top/100');
+        
         setBrickList(response.data);
       } catch (error) {
         console.error(error);
