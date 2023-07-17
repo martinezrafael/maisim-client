@@ -14,7 +14,6 @@ const UserList = () => {
         const accessToken = await getAccessToken();
         const apiEndpoint = `${baseUrl}/admin/api/v2/users`;
         const id = import.meta.env.VITE_CLIENT_ID;
-
         const response = await axios.get(apiEndpoint, {
           headers: {
             "Authorization": `Bearer ${accessToken}`,
