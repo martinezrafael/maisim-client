@@ -9,7 +9,7 @@ const UserList = () => {
     const baseUrl = import.meta.env.VITE_API_URL;
     const id = import.meta.env.VITE_CLIENT_ID;
     const secret = import.meta.env.VITE_CLIENT_SECRET;
-  
+ 
     async function getAccessToken() {
       const url = `${baseUrl}/admin/api/oauth2/access_token`;
       const clientId = id;
@@ -37,14 +37,17 @@ const UserList = () => {
     async function fetchData() {
       try {
         const accessToken = await getAccessToken();
-        const apiEndpoint = `${baseUrl}/v2/users`;
+        const apiEndpoint = `${baseUrl}/admin/api/v2/users`;
+        const id = import.meta.env.VITE_CLIENT_ID;
 
         const response = await axios.get(apiEndpoint, {
           headers: {
             "Authorization": `Bearer ${accessToken}`,
+            "Lw-Client": id,
           },
         });
-        setUsers(response.data)
+        console.log(response.data.data);
+        setUsers(response.data.data)
       } catch (error) {
         console.error("Erro na solicitação para a API externa:", error);
       }
@@ -59,7 +62,7 @@ const UserList = () => {
       <ul>
         {users.map((user, index) => (
           <li key={index}>
-            <p>id:{user.id}</p>
+            <p>{user.username}</p>
           </li>
         ))}
       </ul>
