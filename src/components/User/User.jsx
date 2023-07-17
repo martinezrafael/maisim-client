@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
-import userData from "../../../user.json";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import { getAccessToken } from '../../../api/api.lw';
+import { useParams } from 'react-router-dom';
 
-const User = (props) => {
-  const [userName, setUserName] = useState("");
-  const [cnpj, setCnpj] = useState("");
+
+const User = () => {
+  const [user, setUser] = useState(null);
+  const { userId } = useParams()
+
+  useEffect(()=> {
+    
+    async function fetchUser(){}
+    
+  })
 
   return (
-    <div>
-      <h1 className="font-poppins dark:text-white">{userData.username}</h1>
-      <span className="font-poppins dark:text-white">12.123.1234/001-12</span>
-    </div>
-  );
-};
+    <div>User</div>
+  )
+}
 
-export default User;
+export default User

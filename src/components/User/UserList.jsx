@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { getAccessToken } from "../../../api/api.lw";
 
 
 const UserList = () => {
@@ -7,32 +8,6 @@ const UserList = () => {
 
   useEffect(() => {
     const baseUrl = import.meta.env.VITE_API_URL;
-    const id = import.meta.env.VITE_CLIENT_ID;
-    const secret = import.meta.env.VITE_CLIENT_SECRET;
- 
-    async function getAccessToken() {
-      const url = `${baseUrl}/admin/api/oauth2/access_token`;
-      const clientId = id;
-      const clientSecret = secret;
-
-      const requestBody = {
-        client_id: clientId,
-        client_secret: clientSecret,
-        grant_type: "client_credentials",
-      };
-
-      try {
-        const response = await axios.post(url, requestBody, {
-          headers: {
-            "Lw-Client": clientId,
-          },
-        });
-        return response.data.tokenData.access_token;
-      } catch (error) {
-        console.error("Erro ao obter o token de acesso:", error);
-        throw error;
-      }
-    }
 
     async function fetchData() {
       try {
@@ -46,7 +21,6 @@ const UserList = () => {
             "Lw-Client": id,
           },
         });
-        console.log(response.data.data);
         setUsers(response.data.data)
       } catch (error) {
         console.error("Erro na solicitação para a API externa:", error);
@@ -62,7 +36,8 @@ const UserList = () => {
       <ul>
         {users.map((user, index) => (
           <li key={index}>
-            <p>{user.username}</p>
+            <p>{user.username.toLowerCase()}</p>
+            <p>{user.id}</p>
           </li>
         ))}
       </ul>
