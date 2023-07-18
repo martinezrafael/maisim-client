@@ -1,22 +1,22 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import '../src/index.css';
-import Header from './components/Global/Header';
-
-import User from './components/User/User';
-import Users from './components/User/UserList';
-import Top10List from './components/Comparativo2/Top10List';
+import React from "react";
+import './index.css';
+import Header from "./components/Global/Header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/pages/Home";
+import Sobre from "./components/pages/Sobre";
+import NotFound from "./components/pages/NotFound";
 
 const App = () => {
   return (
-    <div className='sm:max-w-2xl m-auto flex flex-col'>
+    <BrowserRouter>
       <Header />
       <Routes>
-        <Route path='/admin/api/v2/users/:userId' Component={User} />
-        <Route path='/admin/api/v2/users/' Component={Users} />
+        <Route path="/" element={<Home />} />
+        <Route path="sobre" element={<Sobre />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </div>
-  )
-}
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;

@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import axios, { AxiosHeaders } from 'axios';
+import axios from 'axios';
 
 
 
@@ -11,7 +11,6 @@ const Top10List = () => {
   
       try {
         const response = await axios.get('https://apiudf.azurewebsites.net/top/100');
-        
         setBrickList(response.data);
       } catch (error) {
         console.error(error);

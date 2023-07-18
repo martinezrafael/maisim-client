@@ -1,16 +1,19 @@
 import React from "react";
-import User from "../User/User";
+import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
-import TogleTheme from "../TogleTheme/TogleTheme";
+import UserItem from "../User/UserItem";
 
 const Header = () => {
   return (
-    <header className="flex justify-between">
-      <div className="flex flex-col items-center">
+    <header className="header flex items-center">
+      <div className="header__container">
         <Logo />
-        <User />
+        <UserItem />
       </div>
-      <TogleTheme />
+      <nav className="flex">
+        <NavLink to="/" end>Home</NavLink>{" "}
+        <NavLink to="/sobre">Sobre</NavLink>
+      </nav>
     </header>
   );
 };
