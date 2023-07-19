@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ApexCharts from "apexcharts";
 
-
 const CalcMetragem = () => {
   //valores fornecidos pelo usuário
   const [metragemComercial, setMetragemComercial] = useState("");
@@ -30,86 +29,32 @@ const CalcMetragem = () => {
   };
 
   const calcFaturamentoIdeal = () => {
-    const metragemInformada = metragemComercial;
-    const valorMedioPorM2 = calcValorMedioPorM2(metragemInformada);
-
-    const faturamentoIdeal = metragemInformada * valorMedioPorM2;
-
-    return faturamentoIdeal;
+    localStorage.setItem(
+      "faturamento",
+      metragemComercial * calcValorMedioPorM2(metragemComercial)
+    );
+    return localStorage.getItem("faturamento");
   };
 
   const calcPotencialFaturamento = () => {
-    const faturamentoInformado = faturamentoUsuario;
-    const faturamentoIdeal = calcFaturamentoIdeal();
-
-    let potencial = Math.round((faturamentoInformado / faturamentoIdeal) * 100);
-    return potencial;
-  };
-
-  const options = {
-    series: potencialFaturamento,
-    chart: {
-    type: 'radialBar',
-    offsetY: -20,
-    sparkline: {
-      enabled: true
-    }
-  },
-  plotOptions: {
-    radialBar: {
-      startAngle: -90,
-      endAngle: 90,
-      track: {
-        background: "#e7e7e7",
-        strokeWidth: '97%',
-        margin: 5, // margin is in pixels
-        dropShadow: {
-          enabled: true,
-          top: 2,
-          left: 0,
-          color: '#999',
-          opacity: 1,
-          blur: 2
-        }
-      },
-      dataLabels: {
-        name: {
-          show: false
-        },
-        value: {
-          offsetY: -2,
-          fontSize: '22px'
-        }
-      }
-    }
-  },
-  grid: {
-    padding: {
-      top: -10
-    }
-  },
-  fill: {
-    type: 'gradient',
-    gradient: {
-      shade: 'light',
-      shadeIntensity: 0.4,
-      inverseColors: false,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 50, 53, 91]
-    },
-  },
-  labels: ['Average Results'],
+    localStorage.setItem(
+      "potencial_faturamento",
+      Math.round((faturamentoUsuario / calcFaturamentoIdeal()) * 100)
+    );
+    return localStorage.getItem("potencial_faturamento");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let faturamentoIdeal = calcFaturamentoIdeal();
-    setFaturamentoIdeal(faturamentoIdeal);
+    const faturamentoIdealBRL = Intl.NumberFormat("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    }).format(calcFaturamentoIdeal());
 
-    let faturamentoPotencial = calcPotencialFaturamento();
-    setpotencialFaturamento(faturamentoPotencial);
+    setFaturamentoIdeal(faturamentoIdealBRL);
+
+    setpotencialFaturamento(calcPotencialFaturamento());
   };
 
   return (
@@ -119,10 +64,11 @@ const CalcMetragem = () => {
           <label htmlFor="metragem">Insira o seu m2</label>{" "}
           <input
             type="text"
+            required
             id="metragem"
             value={metragemComercial}
             onChange={(event) =>
-              setMetragemComercial(Number(event.target.value))
+              setMetragemComercial(Number(event.target.value).toLocaleString())
             }
           />
         </div>
@@ -130,6 +76,7 @@ const CalcMetragem = () => {
           <label htmlFor="faturamento">Insira o seu faturamento</label>{" "}
           <input
             type="text"
+            required
             id="faturamento"
             value={faturamentoUsuario}
             onChange={(event) =>
@@ -137,7 +84,16 @@ const CalcMetragem = () => {
             }
           />
         </div>
-        <button>Calcular</button>
+        <button
+          style={{
+            backgroundColor: "purple",
+            color: "#fff",
+            padding: "8px",
+            borderRadius: "8px",
+          }}
+        >
+          Calcular
+        </button>
       </form>
       <div>
         <div>
@@ -150,13 +106,13 @@ const CalcMetragem = () => {
           <div>
             <h3>Faturamento médio (aprox)</h3>
             {faturamentoIdeal !== undefined ? (
-              <span>R${faturamentoIdeal}</span>
+              <span>{faturamentoIdeal}</span>
             ) : undefined}
           </div>
         </div>
         <div>
           <h3>Potencial de Faturamento</h3>
-    
+
           {potencialFaturamento !== undefined ? (
             <span>{potencialFaturamento}%</span>
           ) : undefined}
