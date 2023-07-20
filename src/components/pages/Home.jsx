@@ -1,11 +1,16 @@
 import React from 'react'
-import CalcMetragem from '../Comparativo1/CalcMetragem'
+import CalcMetragem from '../Comparativo1/CalcMetragem';
+import Top10List from '../Comparativo2/Top10List';
+
+
+
 
 const Home = () => {
   return (
-    <div>
+    <>
       <CalcMetragem />
-    </div>
+      <Top10List />
+    </>
   )
 }
 

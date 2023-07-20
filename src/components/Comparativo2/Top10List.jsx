@@ -5,19 +5,38 @@ import axios from 'axios';
 
 const Top10List = () => {
   const [brickList, setBrickList] = useState([]);
+  const [brickUser, setBrickUser] = useState(100);
+
 
   useEffect(() => {
+
     async function getBrick() {
   
       try {
-        const response = await axios.get('https://apiudf.azurewebsites.net/top/100');
+        const response = await axios.get(`https://apiudf.azurewebsites.net/top/${brickUser}`);
         setBrickList(response.data);
       } catch (error) {
         console.error(error);
       }
     }
-    getBrick();
+
+    //calcular o share
+    //(qtde / total de quantidades considerando o brick inteiro da região);
     
+    //Define qual é o brick de acordo com o cep informado
+    async function setBrick(cep) {
+      //Definir intervalos
+      //intervalo_1 = 10000000 a 1044999
+
+      //ceps iniciais terminam com 0
+      //ceps finais terminal 9
+
+      if (cep === 1){}
+    }
+
+
+    getBrick();
+    setBrick();
   },[]) 
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ApexCharts from "apexcharts";
+import GraficoPotencial from "./GraficoPotencial";
 
 const CalcMetragem = () => {
   //valores fornecidos pelo usuário
@@ -112,9 +112,9 @@ const CalcMetragem = () => {
         </div>
         <div>
           <h3>Potencial de Faturamento</h3>
-
+        
           {potencialFaturamento !== undefined ? (
-            <span>{potencialFaturamento}%</span>
+            <GraficoPotencial data={potencialFaturamento} />
           ) : undefined}
         </div>
       </div>

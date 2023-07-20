@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { getAccessToken } from '../../../api/api.lw';
 
-const UserItem = () => {
-  const [name, setName] = useState('Rafael');
-  const [cnpj, setCnpj] = useState(33470512892);
+const UserItem = ({id}) => {
+  const [name, setName] = useState('');
+  const [cnpj, setCnpj] = useState(''); 
 
-    //id do usuário sendo extraido da url
-    const { id } = useParams();
+  const userId = '645d26578b32d0158402b142';
 
   //Aqui busca o usuário
   useEffect(() => {
@@ -22,7 +20,7 @@ const UserItem = () => {
         const token = await getAccessToken();
         
         //Endpoint para buscar o usuário
-        const endpoint = `${baseUrl}/admin/api/v2/users/${id}`
+        const endpoint = `${baseUrl}/admin/api/v2/users/${userId}`
 
         //client id para acessar a api
         const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -39,11 +37,8 @@ const UserItem = () => {
         );
 
         //Atualizando os estados com os valores retornados da API
-        // const userName = response.data.username;
-        // const userCnpj = response.data.cnpj;
-        // setName(userName);
-        // setCnpj(userCnpj);
-        console.log(response.data);
+        setName(response.data.username);
+        setCnpj(response.data.billing_info.bf_postalcode);
       } catch (error) {
         console.error(`Erro na solicitação: ${error}`)
       }
